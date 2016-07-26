@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<meta name="robots" content="noindex">
+  <head>
+    <title>Finished 001 - Forced Synchronous Layout</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+  <body>
+    <h1>Avoid Forced Synchronous Layout</h1>
+    <p>Step #1: Resize the bar</p>
+    <div class="sizer"></div>
+    <p>Step #2: Click button to set width</p>
+    <button class="set-size">Set block width</button>
+    <div class="article"></div>
+    <script charset='utf-8' src='../assets/articles-creator.js'></script>
+  <script>
+(function() {
+  // the user can resize this using THE ALMIGHTY POWER OF CSS alone
+  var sizer = document.querySelector('.sizer');
+  
+  /*
+   * Please optimize following code block
+   */
+  document.querySelector('.set-size').addEventListener('click', function(event) {
+    // get all the paragraphs
+    var ps = document.querySelectorAll('.article p');
+    var i = ps.length;
+    var size;
+    
+    // cache the sizer's width, this avoids multiple layouts
+    size = sizer.offsetWidth;
+    while (i--) {
+      ps[i].style.width = size + 'px';
+    }
+
+    event.preventDefault();
+  });
+}());
+</script>
+
+</body>
+</html>

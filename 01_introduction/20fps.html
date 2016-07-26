@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Parallax</title>
+    <style>
+      body, html {
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+      }
+      body {
+        background: url(./assets/bg.jpg) no-repeat;
+      }
+      .parallax {
+        height: 940px;
+        width: 100%;
+        position: absolute;
+      }
+      .parallax div {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: url(./assets/001.png);
+      }
+      .parallax div.animal {
+        background: rgba(0,0,0,0);
+      }
+      .parallax .animal div {
+        width: 60px;
+        height: 60px;
+        background: url(./assets/animal.png);
+        background-size: cover;
+      }
+      img {
+        position: absolute;
+      }
+      body div.div1 {
+        background-size: 432px 432px;
+      }
+      body div.div2 {
+        background-size: 324px 324px;
+      }
+      body div.div3 {
+        background-size: 234px 234px;
+      }
+      body div.div4 {
+        background-size: 543px 543px;
+      }
+      body div.div5 {
+        background-size: 634px 555px;
+      }
+      * {
+        margin:0;
+        padding:0;
+      }
+      .info {
+        color: #fff;
+        padding: 4px;
+        top: 0;
+        z-index: 99;
+        position: absolute;
+        background: #faa;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parallax">
+     <div class="div0"></div>
+     <div class="div1"></div>
+     <div class="div2"></div>
+     <div class="div3"></div>
+     <div class="div4"></div>
+     <div class="div5"></div>
+     <div class="div6"></div>
+     <div class="div7"></div>
+     <div class="div8"></div>
+     <div class="animal">
+      <div class="a0"></div>
+      <div class="a1"></div>
+      <div class="a2"></div>
+      <div class="a3"></div>
+      <div class="a4"></div>
+      <div class="a5"></div>
+      <div class="a6"></div>
+      <div class="a7"></div>
+      <div class="a8"></div>
+     </div>
+    </div>
+    <div class="info">
+     <div class="fps">FPS: <span>?</span></div>
+     <div class="wps">WORK PER SECOND: <span>0</span></div>
+    </div>
+    <script>
+      var body = document.querySelector('.parallax');
+      var X = 0;
+      var divs = [];
+      var anis = [];
+      var I = 0;
+      var fps = document.querySelector('.info .fps span');
+      var wps = document.querySelector('.info .wps span');
+      var now = (new Date()).getTime();
+
+      for (I=0;I<9;I++) {
+          divs.push(document.querySelector('.div' + I));
+          anis.push(document.querySelector('.parallax .animal .a' + I));
+      }
+
+      var doParallax = function () {
+          var T = ((new Date()).getTime() - now);
+          var XX = T / 16;
+          X++;
+          wps.innerHTML = Math.floor(10000 * X / T) / 10;
+          divs.forEach(function (D, I) {
+              D.style.backgroundPosition = (XX * (1 + I) * (0.5 + I % 2) + I * 13) + 'px ' + (XX * (2 + I) - 2 * I) + 'px';
+          });
+          anis.forEach(function (D, I) {
+              D.style.left = 50 + I * 150 + 'px';
+              D.style.top = (Math.sin(T/300 + I) * 100 + 600) + 'px';
+          });
+      };
+
+      setInterval(doParallax, 50);
+    </script>
+  </body>
+</html>

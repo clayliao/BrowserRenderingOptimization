@@ -1,0 +1,18 @@
+html {
+  font-family: sans-serif;
+  line-height: 1.4;
+}
+.lipsum-blocks p {
+  display: inline-block;
+  margin: 1em 2.5em 0 0;
+  width: 200px;
+  vertical-align: top;
+}
+.sizer {
+  width: 100px;
+  height: 30px;
+  background: #188FFF;
+  margin: 1em 0;
+  resize: horizontal;
+  overflow: hidden;
+}
